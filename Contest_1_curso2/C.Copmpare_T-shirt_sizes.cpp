@@ -16,7 +16,43 @@ int main () {
     REGALO;
     ll t;
     cin >> t;
-    
+
     while(t--){
+      string a, b;
+      cin >> a >> b;
+    ll i = 0, j = 0;
+      while (a[i] != '\0') {
+        i++;
+      }
+
+      while (b[j] != '\0') {
+        j++;
+      }
+
+      if (a[i-1] < b[j-1]) {
+        cout << "> \n";
+      } else if (a[i-1] > b[j-1]) {
+        cout << "< \n";
+      } else {
+        if (a[i-1] == 'M') {
+          cout << "= \n";
+        } else if (a[i-1] == 'S') {
+          if (i < j) {
+            cout << "> \n";
+          } else if (i > j) {
+            cout << "< \n";
+          } else {
+            cout << "= \n";
+          }
+        } else if (a[i-1] == 'L') {
+          if (i < j) {
+            cout << "< \n";
+          } else if (i > j) {
+            cout << "> \n";
+          } else {
+            cout << "= \n";
+          }
+        }
+      }
     }
 }
