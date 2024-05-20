@@ -1,27 +1,51 @@
 
------------------------------/ Compilar /-----------------------------
+# Resumen de algoritmos y estructuras para ICPC
+
+## Indice
+
+1. [Compilación](#compialción)
+
+2. [Macros](#macros)
+    
+3. [Estructuras](#estructuras)
+
+    3.1 [String](#strings)
+
+    3.2 [Vectores](#vectores)
+
+4. [Algoritmos](#algoritmos)
+
+    4.1 [DFS](#dfs)
+
+    4.2 [BFS](#bfs)
 
 
-Vamos a compilar con g++, escribo en la terminal
 
-g++ -Wall -std=c++17 "fiel.cpp"
+## Compilación
 
-luego 
+Vamos a compilar con g++:
 
-./a.out
+`flasgs g++ -O2 -Wall -Wextra -std=c++17 "file.cpp"
+g++ -Wall -std=c++17 "fiel.cpp"`
 
-e ingreso los input que me hagan falta
+Luego lo ejecutamos con:
 
-flasgs g++ -O2 -Wall -Wextra -std=c++17 "file.cpp"
+`./a.out`
+
+e ingreso los input que me hagan falta.
 
 
------------------------------/ Macros /-----------------------------
 
+## Macros
+
+Estos son los macros:
+
+``` c++
 
 #include <bits/stdc++.h>
 #define fore(i,a,b) for(int i=a;i<b;i++)
 #define pb push_back
-#define sz(x) (int)x.size()
+#define sz(x) (ll)x.size()
 #define fst first
 #define snd second 
 #define all(x) x.begin(),x.end()
@@ -40,6 +64,77 @@ int main () {
     while(t--){
     }
 }
+
+```
+
+## Estructuras
+
+### Strings 
+
+```c++
+string s="Hola mundo ";
+string t = "ANA";
+string a = s + t ;          //concatena
+
+char c,s; cin >> c>>s;
+cout << int (c-'a') <<  "\n"
+cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor en ascii de 'a', despues imprime el char 'p'
+```
+
+### Vectores
+
+* Crea un vector:
+
+    ```c++
+    vector <int> v;
+    ```
+* Agrega el elemento x al final del vector:
+    ```c++
+    v.push_back(x);
+    ```
+* Elimina el elemento x:
+    ```c++
+    v.pop_back(x);
+    ```
+* Tamaño del vector:
+    ```c++
+    v.size();
+    ```
+* Ordena el vector con complejidad O(n*log(n)):
+    ```c++
+    sort(v.begin(), v.end());
+    ```
+* Devuelve la posicion del menor elemento mayor a p:
+    ```c++
+    lower_bound(a.begin(), a.end(), p) - a.begin();
+    ```
+* Ciclo con vectores:
+    ```c++
+    for(auto i:v){
+            cout << i << "";    //imprime los elementos del arreglo
+        }
+    ```
+
+### Set
+
+* Crea un set:
+    ```c++
+    set<ll> st;
+    ```
+* Insertamos un elemento en el conjunto, si hay varios no los agrega repetidos:
+    ```c++
+    st.insert(x);
+    ```
+* Elimino el elemnto x del set:
+    ```c++
+    st.erase(x);
+    ```
++ Pregunta si x esta en el conjunto:
+    ```c++
+    st.count(x)
+    ```
+
+Todas las funciones son de orden O(log(n))
 
 -----------------------------/ Funciones con flotantes /-----------------------------
 
@@ -120,44 +215,6 @@ uf_find(int a) {
 }
 
 
------------------------------/ Vectores /-----------------------------
-
-
-vector <int> v;             //crea un vector
-v.push_back(x)              //agrega el elemento x al final del vector
-v.pop_back(x)               //elimina el elemento x
-v.size()                    //tamaño del vector
-sort(v.begin(), v.end())    //ordena el vector con complejidad 0(n*log n)
-vector<int> a(n);                                   //array de n vectores
-lower_bound(a.begin(), a.end(), p) - a.begin();     //devuelve la posicion del menor elemento mayor a p
-
-for(auto i:v){
-        cout << i << "";    //imprime los elementos del arreglo
-    }
-
-
------------------------------/ Strings /-----------------------------
-
-string s="Hola mundo ";
-string t = "ANA";
-string a = s + t ;          //concatena
-
-char c,s; cin >> c>>s;
-cout << int (c-'a') <<  "\n"
-cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor en ascii de 'a', despues imprime el char 'p'
-
-
------------------------------/ Set /-----------------------------
-
-
-set<ll> st;                 //inicializo el set
-st.insert(x);               //insertamos un elemento en el conjunto, si hay varios no importa
-st.erase(x);                //elimino el elemento x del set
-st.count(x)                 //pregunta si x esta en el conjunto
-
-//todas las funciones son de orden O(log n)
-
-
 -----------------------------/ Map /-----------------------------
 
 
@@ -219,4 +276,42 @@ int to(nt i, int j) {
 
 ii from(int x) {        //Esta te devuelve el pair del numero asociado de la fila y la columna respectivamente
     return {x/m, x%m};
+}
+
+
+-----------------------------/ DFS /-----------------------------
+
+
+void dfs(ll nodoQueVeo, vector<vector<ll>> &Grafo, vector<bool> &Vistado) {
+    Vistado[nodoQueVeo] = true;
+
+    for(ll u :Grafo[v]) {
+        if(!Vistado[u]) {
+            dfs(u, Grafo, Vistado)
+        }
+    }
+}
+
+// El & me sirve para modificar los elementos que voy a ingresar y para no copiar todo un Grafo
+
+
+-----------------------------/ BFS /-----------------------------
+
+
+void bfs(ll nodoQueVeo, vector<vector<ll>> &Grafo) {
+    vector<bool> Visitado(sz(Grafo))     // Le da el tamaño de Grafo
+    queue<ll> q;
+
+    Visitado[v] = true;
+    q.push(v)
+    while(!q.empty()) {
+        v = q.front();
+        q.pop();
+        for(ll u :Grafo[v]) {
+            if (!Visitado[u]) {    
+                Visitado[u] = true;
+                q.push(u);
+            }
+        }
+    }
 }

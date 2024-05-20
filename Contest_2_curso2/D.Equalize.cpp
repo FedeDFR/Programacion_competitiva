@@ -14,30 +14,36 @@ typedef pair<int,int> ii;
 
 int main () {
     REGALO;
-    ll t, res = 0;
+    ll t;
     cin >> t;
-
+    
     while(t--){
-        ll a, b, n; cin >> a >> b >> n;
-        ll aOrb;
-
-        if (a < b) {
-            aOrb = 0;
-        } else {
-            aOrb = 1;
-        }
-
-        while (a <= n || b <= n) {
-            if (aOrb) {
-                b = b + a;
-                res++;
-            } else {
-                a = a + b;
-                res++;
-            }
+        ll n; cin >> n;
+        set<ll> st; ll res = 0;
+        fore(i,0,n) {
+            ll as;
+            cin >> as;
+            st.insert(as);
         }
         
+        vector<ll> vec;
+        for (auto i: st) {
+            vec.pb(i);    
+        }
+
+        ll l = 0, r = 0;
+        while (l < vec.size() && r < vec.size()) {
+            if ((vec[r] - vec[l]) <= (n - 1)) {
+                r++;
+            } else {
+                l++;
+                //cout << r << l << "\n";
+                res = max(res, r-l+1);
+            } 
+        }
+        //cout << r << l << vec.size() << "\n";
+        res = max(res, r-l);
+    
         cout << res << "\n";
     }
-
 }
