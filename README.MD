@@ -13,11 +13,19 @@
 
     3.2 [Vectores](#vectores)
 
+    3.3 [Set](#set)
+
+    3.4 [Map](#map)
+
 4. [Algoritmos](#algoritmos)
 
-    4.1 [DFS](#dfs)
+    4.1 [Dijkstra](#dijkstra)
 
-    4.2 [BFS](#bfs)
+    4.2 [Kruskal](#Kruskal)
+
+    4.2 [DFS](#dfs)
+
+    4.3 [BFS](#bfs)
 
 
 
@@ -25,8 +33,7 @@
 
 Vamos a compilar con g++:
 
-`flasgs g++ -O2 -Wall -Wextra -std=c++17 "file.cpp"
-g++ -Wall -std=c++17 "fiel.cpp"`
+`g++ -O2 -Wall -Wextra -std=c++17 "file.cpp"`
 
 Luego lo ejecutamos con:
 
@@ -41,7 +48,6 @@ e ingreso los input que me hagan falta.
 Estos son los macros:
 
 ``` c++
-
 #include <bits/stdc++.h>
 #define fore(i,a,b) for(int i=a;i<b;i++)
 #define pb push_back
@@ -64,12 +70,11 @@ int main () {
     while(t--){
     }
 }
-
 ```
 
 ## Estructuras
 
-### Strings 
+### 1. Strings 
 
 ```c++
 string s="Hola mundo ";
@@ -81,7 +86,7 @@ cout << int (c-'a') <<  "\n"
 cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor en ascii de 'a', despues imprime el char 'p'
 ```
 
-### Vectores
+### 2. Vectores
 
 * Crea un vector:
 
@@ -111,11 +116,11 @@ cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor e
 * Ciclo con vectores:
     ```c++
     for(auto i:v){
-            cout << i << "";    //imprime los elementos del arreglo
-        }
+        cout << i << "";    //imprime los elementos del arreglo
+    }
     ```
 
-### Set
+### 3. Set
 
 * Crea un set:
     ```c++
@@ -133,8 +138,132 @@ cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor e
     ```c++
     st.count(x)
     ```
+Todas las funciones son de orden O(log(n)).
 
-Todas las funciones son de orden O(log(n))
+### 4. Map
+
+Podes asociar distintos tipos de datos a otros
+
+* Inicializo un map que asocia un pair con un int:
+    ```c++
+    map <pair <ll,ll>,int> mp;
+    ```
+* Asocia el pair {2,4} esta asociada al numero 7:
+    ```c++
+    mp [{2,4}]=7;
+    ```
+* Libera la asociacion al pair {2,4} a 7:
+    ```c++
+    mp.erase ({2,4});
+    ```
+* Devuelve 1 si el pair {2,4} esta asociado a algo:
+    ```c++
+    mp.count({2,4});
+    ```
+
+## Algoritmos
+
+### 1. Dijkstra
+
+Veo el minimo coste para llegar de un nodo a otro, actualizando los costos de llegar a los nodos vecinos. 
+Este algoritmo funciona con valores >= 0. La complejidad de O((n+m)*log(n)).
+
+#### Ejercicios: 
+    
+* B.Biridian_forest
+
+#### Codigo:
+```c++
+vector<pair<int,int> > g[MAXN];  // u->[(v,cost)]
+ll dist[MAXN];
+void dijkstra(int x){
+	memset(dist,-1,sizeof(dist));
+	priority_queue<pair<ll,int> > q;
+	dist[x]=0;q.push({0,x});
+	while(!q.empty()){
+		x=q.top().snd;ll c=-q.top().fst;q.pop();
+		if(dist[x]!=c)continue;
+		fore(i,0,g[x].size()){
+			int y=g[x][i].fst; ll c=g[x][i].snd;
+			if(dist[y]<0||dist[x]+c<dist[y])
+				dist[y]=dist[x]+c,q.push({-dist[y],y});
+		}
+	}
+}
+```
+
+### 2. Kruskal
+
+Supongo valores >= 0. Creo un sub grafo conexo con n-1 aristas con el menor costo.
+No se crean ciclos y se puede representar con un arbol. Tiene complejidad O(n*log(n)).
+
+#### Ejercicios:
+
+* B.Mr._kitayutas_colorful_graph
+
+#### Codigo:
+```c++
+int uf[MAXN];
+void uf_init(){memset(uf,-1,sizeof(uf));}
+int uf_find(int x){return uf[x]<0?x:uf[x]=uf_find(uf[x]);}
+bool uf_join(int x, int y){
+	x=uf_find(x);y=uf_find(y);
+	if(x==y)return false;
+	if(uf[x]>uf[y])swap(x,y);
+	uf[x]+=uf[y];uf[y]=x;
+	return true;
+}
+vector<pair<ll,pair<int,int> > > es; // edges (cost,(u,v))
+ll kruskal(){  // assumes graph is connected
+	sort(es.begin(),es.end());uf_init();
+	ll r=0;
+	fore(i,0,es.size()){
+		int x=es[i].snd.fst,y=es[i].snd.snd;
+		if(uf_join(x,y))r+=es[i].fst; // (x,y,c) belongs to mst
+	}
+	return r; // total cost
+}
+```
+
+### 3. DFS
+
+El & me sirve para modificar los elementos que voy a ingresar y para no copiar todo un Grafo.
+
+#### Codigo: 
+```c++
+void dfs(ll nodoQueVeo, vector<vector<ll>> &Grafo, vector<bool> &Vistado) {
+    Vistado[nodoQueVeo] = true;
+
+    for(ll u :Grafo[nodeQueVeo]) {
+        if(!Vistado[u]) {
+            dfs(u, Grafo, Vistado);
+        }
+    }
+}
+```
+
+### 4. BFS
+
+#### Codigo:
+```c++
+void bfs(ll nodoQueVeo, vector<vector<ll>> &Grafo) {
+    vector<bool> Visitado(sz(Grafo))     // Le da el tamaño de Grafo
+    queue<ll> q;
+
+    Visitado[v] = true;
+    q.push(v)
+    while(!q.empty()) {
+        v = q.front();
+        q.pop();
+        for(ll u :Grafo[v]) {
+            if (!Visitado[u]) {    
+                Visitado[u] = true;
+                q.push(u);
+            }
+        }
+    }
+}
+```
 
 -----------------------------/ Funciones con flotantes /-----------------------------
 
@@ -215,16 +344,6 @@ uf_find(int a) {
 }
 
 
------------------------------/ Map /-----------------------------
-
-
-//Podes asociar distintos tipos de datos a otros
-
-map <pair <ll,ll>,int> mp;  //inicializo un map que asocia un pair con un int
-mp [{2,4}]=7;               //asocia el pair {2,4} esta asociada al numero 7
-mp.erase ({2,4});           //libera la asociacion al pair {2,4} a 7
-mp.count({2,4});            //devuelve 1 si el pair {2,4} esta asociado a algo
-
 
 -----------------------------/ Pair /-----------------------------
 
@@ -278,40 +397,3 @@ ii from(int x) {        //Esta te devuelve el pair del numero asociado de la fil
     return {x/m, x%m};
 }
 
-
------------------------------/ DFS /-----------------------------
-
-
-void dfs(ll nodoQueVeo, vector<vector<ll>> &Grafo, vector<bool> &Vistado) {
-    Vistado[nodoQueVeo] = true;
-
-    for(ll u :Grafo[v]) {
-        if(!Vistado[u]) {
-            dfs(u, Grafo, Vistado)
-        }
-    }
-}
-
-// El & me sirve para modificar los elementos que voy a ingresar y para no copiar todo un Grafo
-
-
------------------------------/ BFS /-----------------------------
-
-
-void bfs(ll nodoQueVeo, vector<vector<ll>> &Grafo) {
-    vector<bool> Visitado(sz(Grafo))     // Le da el tamaño de Grafo
-    queue<ll> q;
-
-    Visitado[v] = true;
-    q.push(v)
-    while(!q.empty()) {
-        v = q.front();
-        q.pop();
-        for(ll u :Grafo[v]) {
-            if (!Visitado[u]) {    
-                Visitado[u] = true;
-                q.push(u);
-            }
-        }
-    }
-}
