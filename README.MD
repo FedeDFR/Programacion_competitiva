@@ -19,13 +19,15 @@
 
 4. [Algoritmos](#algoritmos)
 
-    4.1 [Dijkstra](#dijkstra)
+    4.1 [Dijkstra](#1-dijkstra)
 
-    4.2 [Kruskal](#Kruskal)
+    4.2 [Kruskal](#2-kruskal)
 
-    4.2 [DFS](#dfs)
+    4.2 [DFS](#3-dfs)
 
-    4.3 [BFS](#bfs)
+    4.3 [BFS](#4-bfs)
+
+    4.5 [Matematica](#5-matematica)
 
 
 
@@ -166,7 +168,7 @@ Podes asociar distintos tipos de datos a otros
 ### 1. Dijkstra
 
 Veo el minimo coste para llegar de un nodo a otro, actualizando los costos de llegar a los nodos vecinos. 
-Este algoritmo funciona con valores >= 0. La complejidad de O((n+m)*log(n)).
+Este algoritmo funciona con valores $>= 0$. La complejidad es de $O((n+m)*log(n))$ donde tengo $n$ nodos y $m$ aristas.
 
 #### Ejercicios: 
     
@@ -194,8 +196,9 @@ void dijkstra(int x){
 
 ### 2. Kruskal
 
-Supongo valores >= 0. Creo un sub grafo conexo con n-1 aristas con el menor costo.
-No se crean ciclos y se puede representar con un arbol. Tiene complejidad O(n*log(n)).
+Es decir, busca un subconjunto de aristas que, formando un árbol, incluyen todos los vértices y donde el valor de la suma de todas las aristas del árbol es el mínimo.
+
+Supongo valores $>= 0$. Creo un sub grafo conexo con $n-1$ aristas con el menor costo. No se crean ciclos y se puede representar con un arbol. Tiene complejidad $O(n*log(n))$.
 
 #### Ejercicios:
 
@@ -227,9 +230,12 @@ ll kruskal(){  // assumes graph is connected
 
 ### 3. DFS
 
-El & me sirve para modificar los elementos que voy a ingresar y para no copiar todo un Grafo.
+Es un algoritmo de búsqueda no informada utilizado para recorrer todos los nodos de un grafo o árbol (teoría de grafos) de manera ordenada, pero no uniforme. Su funcionamiento consiste en ir expandiendo todos y cada uno de los nodos que va localizando, de forma recurrente, en un camino concreto. Cuando ya no quedan más nodos que visitar en dicho camino, regresa (Backtracking), de modo que repite el mismo proceso con cada uno de los hermanos del nodo ya procesado.
 
 #### Codigo: 
+
+El & me sirve para modificar los elementos que voy a ingresar y para no copiar todo un Grafo.
+
 ```c++
 void dfs(ll nodoQueVeo, vector<vector<ll>> &Grafo, vector<bool> &Vistado) {
     Vistado[nodoQueVeo] = true;
@@ -243,6 +249,8 @@ void dfs(ll nodoQueVeo, vector<vector<ll>> &Grafo, vector<bool> &Vistado) {
 ```
 
 ### 4. BFS
+
+Es un algoritmo de búsqueda no informada utilizado para recorrer o buscar elementos en un grafo (usado frecuentemente sobre árboles). Intuitivamente, se comienza en la raíz (eligiendo algún nodo como elemento raíz en el caso de un grafo) y se exploran todos los vecinos de este nodo. A continuación para cada uno de los vecinos se exploran sus respectivos vecinos adyacentes, y así hasta que se recorra todo el árbol.
 
 #### Codigo:
 ```c++
@@ -265,6 +273,39 @@ void bfs(ll nodoQueVeo, vector<vector<ll>> &Grafo) {
 }
 ```
 
+### 5. Matematica
+
+#### 5.1. $mod(n)$:
+
+Si tengo el $xmod(y) =$ al resto de hacer x dividido y, si x es negativo el mod es igual a $y - (xmod(y))$. Ahora si $x = a - b$, el modulo queda $((a - b)mod(y) + y)mod(y)$ vamos a hacer esto para calcular el mod en C++ ya que este te da restos negativos.
+
+ + Exponenciación binaria 
+
+    Supongamos que queremos calcular $b^emod(y)$ en c++ haríamos los siguitente:
+
+    ```c++
+    int elevar(b, e) {
+        int x;
+        if(e == 0) {
+            return 1;
+        } else if(e%2 == 0) {
+            x = elevar(b,e/2);
+            return x*x%y;
+        } else {
+            x = elevar(b,(e-1)/2);
+            x*x%y;
+            return x*b%y;
+        }
+    }
+
+    ```
+#### 5.2. División techo 
+
+Para hacer una división techo entre $a$ y $b$ se hace: 
+```c++
+int a, b;
+int result = (a+b-1)/b;
+```
 -----------------------------/ Funciones con flotantes /-----------------------------
 
 
@@ -273,8 +314,6 @@ https://www.programacionfacil.org/cursos/c++/capitulo-19-funciones-matematicas.h
 
 -----------------------------/ Formulas y funciones/-----------------------------
 
-
--Division techo para int a, b; [a/b]:    (a+b-1)/b
 
 -Array de sumas parciales a[n]:    sum[n] = sum[n-1]+a[n]     donde sum[0] = 0 
     para calcular la suma entre un a[l] y a[r] siendo l<r:   sum[r+1]-sum[l]
