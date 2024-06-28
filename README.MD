@@ -6,32 +6,52 @@
 1. [Compilación](#compialción)
 
 2. [Macros](#macros)
+
+3. [Tiempos y orden](#3-tiempos-y-orden)
     
-3. [Estructuras](#estructuras)
+4. [Estructuras](#estructuras)
 
-    3.1 [String](#strings)
+    4.1 [String](#strings)
 
-    3.2 [Vectores](#vectores)
+    4.2 [Vectores](#vectores)
 
-    3.3 [Set](#set)
+    4.3 [Set](#set)
 
-    3.4 [Map](#map)
+    4.4 [Map](#map)
 
-4. [Algoritmos](#algoritmos)
+5. [Algoritmos](#algoritmos)
 
-    4.1 [Dijkstra](#1-dijkstra)
+    5.1 [Dijkstra](#1-dijkstra)
 
-    4.2 [Kruskal](#2-kruskal)
+    5.2 [Kruskal](#2-kruskal)
 
-    4.2 [DFS](#3-dfs)
+    5.2 [DFS](#3-dfs)
 
-    4.3 [BFS](#4-bfs)
+    5.3 [BFS](#4-bfs)
 
-    4.5 [Matematica](#5-matematica)
+    5.5 [Matematica](#5-matematica)
+
+6. [Trucos y funciones](#6-trucos-y-funciones)
+
+    6.1 [División techo](#61-división-techo)
+
+    6.2 [Sumas parciales](#62-sumas-parciales)
+
+    6.3 [Ordenar un arreglo](#63-ordenar-un-arreglo)
+
+    6.4 [Primer elemento mayor o igual a $x$](#64-primer-elemento-mayor-o-igual-a-x)
+
+    6.5 [memset](#65-memset)
+
+    6.6 [Trigonometría](#66-trigonometría)
+
+    6.7 [Strings](#41-strings)
+
+    
 
 
 
-## Compilación
+## 1. Compilación
 
 Vamos a compilar con g++:
 
@@ -45,7 +65,7 @@ e ingreso los input que me hagan falta.
 
 
 
-## Macros
+## 2. Macros
 
 Estos son los macros:
 
@@ -73,10 +93,15 @@ int main () {
     }
 }
 ```
+## 3. Tiempos y orden
 
-## Estructuras
+Tiempo aprox de una pc es $1s = 10^8$ operaciones
+Funcion de ordenacion de c++ es de $O(n*log(n))$.
 
-### 1. Strings 
+
+## 4. Estructuras
+
+### 4.1. Strings 
 
 ```c++
 string s="Hola mundo ";
@@ -88,7 +113,7 @@ cout << int (c-'a') <<  "\n"
 cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor en ascii de 'a', despues imprime el char 'p'
 ```
 
-### 2. Vectores
+### 4.2. Vectores
 
 * Crea un vector:
 
@@ -122,7 +147,7 @@ cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor e
     }
     ```
 
-### 3. Set
+### 4.3. Set
 
 * Crea un set:
     ```c++
@@ -142,7 +167,7 @@ cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor e
     ```
 Todas las funciones son de orden O(log(n)).
 
-### 4. Map
+### 4.4. Map
 
 Podes asociar distintos tipos de datos a otros
 
@@ -163,9 +188,9 @@ Podes asociar distintos tipos de datos a otros
     mp.count({2,4});
     ```
 
-## Algoritmos
+## 5. Algoritmos
 
-### 1. Dijkstra
+### 5.1. Dijkstra
 
 Veo el minimo coste para llegar de un nodo a otro, actualizando los costos de llegar a los nodos vecinos. 
 Este algoritmo funciona con valores $>= 0$. La complejidad es de $O((n+m)*log(n))$ donde tengo $n$ nodos y $m$ aristas.
@@ -194,7 +219,7 @@ void dijkstra(int x){
 }
 ```
 
-### 2. Kruskal
+### 5.2. Kruskal
 
 Es decir, busca un subconjunto de aristas que, formando un árbol, incluyen todos los vértices y donde el valor de la suma de todas las aristas del árbol es el mínimo.
 
@@ -228,7 +253,7 @@ ll kruskal(){  // assumes graph is connected
 }
 ```
 
-### 3. DFS
+### 5.3. DFS
 
 Es un algoritmo de búsqueda no informada utilizado para recorrer todos los nodos de un grafo o árbol (teoría de grafos) de manera ordenada, pero no uniforme. Su funcionamiento consiste en ir expandiendo todos y cada uno de los nodos que va localizando, de forma recurrente, en un camino concreto. Cuando ya no quedan más nodos que visitar en dicho camino, regresa (Backtracking), de modo que repite el mismo proceso con cada uno de los hermanos del nodo ya procesado.
 
@@ -248,7 +273,7 @@ void dfs(ll nodoQueVeo, vector<vector<ll>> &Grafo, vector<bool> &Vistado) {
 }
 ```
 
-### 4. BFS
+### 5.4. BFS
 
 Es un algoritmo de búsqueda no informada utilizado para recorrer o buscar elementos en un grafo (usado frecuentemente sobre árboles). Intuitivamente, se comienza en la raíz (eligiendo algún nodo como elemento raíz en el caso de un grafo) y se exploran todos los vecinos de este nodo. A continuación para cada uno de los vecinos se exploran sus respectivos vecinos adyacentes, y así hasta que se recorra todo el árbol.
 
@@ -273,9 +298,9 @@ void bfs(ll nodoQueVeo, vector<vector<ll>> &Grafo) {
 }
 ```
 
-### 5. Matematica
+### 5.5. Matematica
 
-#### 5.1. $mod(n)$:
+#### 5.5.1. $mod(n)$:
 
 Si tengo el $xmod(y) =$ al resto de hacer x dividido y, si x es negativo el mod es igual a $y - (xmod(y))$. Ahora si $x = a - b$, el modulo queda $((a - b)mod(y) + y)mod(y)$ vamos a hacer esto para calcular el mod en C++ ya que este te da restos negativos.
 
@@ -297,72 +322,108 @@ Si tengo el $xmod(y) =$ al resto de hacer x dividido y, si x es negativo el mod 
             return x*b%y;
         }
     }
-
     ```
-#### 5.2. División techo 
+
+## 6. Trucos y funciones
+
+### 6.1. División techo 
 
 Para hacer una división techo entre $a$ y $b$ se hace: 
+
 ```c++
 int a, b;
 int result = (a+b-1)/b;
 ```
+
+### 6.2. Sumas parciales
+
+Supongamos que tenemos un arreglo `a[n]` y queremos calcular la suma de todas las posiciones hasta la i-esima posición, hacemos los siguiente:
+
+```c++
+
+int sum[n];
+int sum[0] = 0;
+
+fore(i,0,n) {
+    sum[i+1] = sum[i] + a[i]; 
+}
+```
+
+### 6.3. Ordenar un arreglo
+
+Supongamos que tenemos un arreglo `a[n]`, hacemos lo siguiente:
+
+```c++
+sort(a, a+n);
+```
+
+Tiene una complejidad de $O(n log(n))$.
+
+### 6.4. Primer elemento mayor o igual a $x$
+
+Devuelve un puntero al primer elemento mayor igual a $x$ de un `a[n]` ordenado:
+
+```c++
+lower_bound(a, a+n, x);
+```
+
+Con vectores es:
+```c++
+lower_bound(v.begin(), v.end(), x) - v.begin();
+```
+
+Si devuelve un indice fuera de rango (un elemento mayor o igual a $x$) no existe.
+
+### 6.5. memset
+
+La función memset copia el valor de c (convertido a un unsigned char) a cada uno de los primeros n caracteres en el objeto al cual señala s. La función memset devuelve el valor de s.
+
+```c++
+void *memset ( void *s, int c, size_t n);
+```
+
+### 6.6. Trigonometría
+
++ Calcula el coseno de x (medido en radianes).
+    ```c++
+	double cos(double x);
+    ```
+	
++ Devuelve el seno de x (medido en radianes).
+    ```c++
+	double sin(double x);
+    ```
+	
++ Devuelve la tangente de x (medida en radianes).
+    ```c++
+	double tan(double x);
+    ```
+
+### 6.7. Strings
+
++ Busca cualquier carácter que esté en mayúsculas.
+    ```c++
+	int isupper(int c);
+    ```
+	
++ Busca cualquier carácter que sea letra minúscula.
+    ```c++
+	int islower(int c);
+    ```
++ Convierte una letra mayúscula en la minúscula correspondiente.Si el argumento es un carácter para el que isupper resulta verdadero y existe un caracter correspondiente para el cual islower resulta verdadero, la función tolower devuelve elo carácter correspondiente.
+
+    ```c++
+	int tolower(int c);
+    ```
++ Convierte una letra minúscula a la letra mayúscula correspondiente.Si el argumento es un carácter para el cual islower resulta verdadero y existe un carácter correspondiente para el cual isupper es verdadero, la función toupper devueve el carácter correspondiente.
+
+    ```c++
+	int toupper(int c);
+    ```
+
 -----------------------------/ Funciones con flotantes /-----------------------------
 
-
 https://www.programacionfacil.org/cursos/c++/capitulo-19-funciones-matematicas.html
-
-
------------------------------/ Formulas y funciones/-----------------------------
-
-
--Array de sumas parciales a[n]:    sum[n] = sum[n-1]+a[n]     donde sum[0] = 0 
-    para calcular la suma entre un a[l] y a[r] siendo l<r:   sum[r+1]-sum[l]
-
--Ordenar un Array a[n]: sort(a, a+n)
-
--Devuelve puntero del primer elementomayor igual a x de un a[n] ordenado: lower_bound(a, a+n, x)
-    Con Vectores: lower_bound(v.begin(), v.end(), x)
-    Para que te de el indice tendrias que hacer incide = lower_bound(a, a+n, x) - a;
-    Con Vectores: indice = lower_bound(v.begin(), v.end(), x) - v.begin();
-
-    Si devuelve un indice fuera de rango no existe un elemento mayor o igual
-
--La función memset copia el valor de c (convertido a un unsigned char) a cada uno de los primeros n caracteres en el objeto al cual señala s. La función memset devuelve el valor de s.
-	void *memset ( void *s, int c, size_t n);
-	
--Busca cualquier carácter que esté en mayúsculas.
-	int isupper(int c);
-	
--Busca cualquier carácter que sea letra minúscula.
-	int islower(int c);
-	
--Convierte una letra mayúscula en la minúscula correspondiente.Si el argumento es un carácter para el que isupper resulta verdadero y existe un caracter correspondiente para el cual islower resulta verdadero, la función tolower devuelve elo carácter correspondiente.
-	int tolower(int c);
-	
--Convierte una letra minúscula a la letra mayúscula correspondiente.Si el argumento es un carácter para el cual islower resulta verdadero y existe un carácter correspondiente para el cual isupper es verdadero, la función toupper devueve el carácter correspondiente.
-	int toupper(int c);
-	
--Calcula el coseno de x (medido en radianes).
-	double cos(double x);
-	
--Devuelve el seno de x (medido en radianes).
-	double sin(double x);
-	
--Devuelve la tangente de x (medida en radianes).
-	double tan(double x);
-	
-		
------------------------------/ Tipos de datos y sus tamaños /-----------------------------
-
-
-
-
-
------------------------------/ Tiempos y orden /-----------------------------
-
-
-Tiempo aprox de una pc es 1s = 10^8 operaciones
-Funcion de ordenacion de c++ es de o(n log(n))
 
 
 -----------------------------/ Union Find-Disjoint set union /-----------------------------
