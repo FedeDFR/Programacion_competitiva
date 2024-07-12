@@ -18,18 +18,17 @@ int main () {
     cin >> t;
     
     while(t--){
-        set<ll> v;
-        ll n; cin >> n;
-        fore(i,0,n) {
-            ll x; cin >> x;
-            v.insert(x);
+        ll x, y; cin >> x >> y;
+
+        if (x < 0) {
+            x = -x;
         }
 
-        ll res = v.size();
-        if (v.erase(0)) {
-            res--;
+        if(y+x+1 < x) {
+            cout << "NO\n";
+        } else {
+            cout << "YES\n";
         }
         
-
     }
 }
