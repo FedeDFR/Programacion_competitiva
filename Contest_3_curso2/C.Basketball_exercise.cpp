@@ -11,9 +11,20 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 
-ll f(ll pos, int fila, ll ) {
-    ll res;
-    res = max(f(pos+1, 1-fila, a) + a[fila][pos], f(pos+1, fila, a));
+ll a[2][100005];
+ll dp[2][100005];
+
+ll f(ll fila, ll pos, ll n) {
+    if(pos == n) {
+        return 0;
+    } 
+
+    if(dp[fila][pos] != -1) {
+        return dp[fila][pos];
+    } else {
+        dp[fila][pos] = max(f(fila,pos+1,n), a[fila][pos] + f((fila+1)%2,pos+1,n));
+        return dp[fila][pos];
+    }
 }
 
 
@@ -21,25 +32,21 @@ int main () {
     REGALO;
     ll n;
     cin >> n;
-    ll a[2][n], aux, res = 0;
-    ll dp[n];
+
+    fore(i,0,100005){
+        dp[0][i]=-1;
+        dp[1][i]=-1;
+    }
 
     fore(i,0,n) {
         cin >> a[0][i];
-        dp[i] = 0;
     }
-
+    
     fore(i,0,n) {
         cin >> a[1][i];
-    }
-    ll pos = 0;
-    ll fila = 0;
-    fore(i,0,n) {
-        res = max(a[fila][pos]
+    }    
 
-    }
-    res = max(f(0,0,a), f(0,1,a));
-
+    ll res = max(f(0,0,n), f(1,0,n));
 
     cout << res << "\n";
 }

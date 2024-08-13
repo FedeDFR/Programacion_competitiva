@@ -11,25 +11,23 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 
-
 int main () {
     REGALO;
-    ll t;
-    cin >> t;
-    
-    while(t--){
-        set<ll> v;
-        ll n; cin >> n;
-        fore(i,0,n) {
-            ll x; cin >> x;
-            v.insert(x);
-        }
+    ll n, m; cin >> n >> m;
+    vector<vector<ll>> g(n);
+    ll res = 0;
 
-        ll res = v.size();
-        if (v.erase(0)) {
-            res--;
-        }
-        
-
+    fore(i,0,m) {
+      ll x, y; cin >> x >> y;
+      x--;
+      y--;
+      g[x].pb(y);
+      g[y].pb(x);
     }
+
+    fore(i,0,n) {
+      res += g[i].size();
+    }
+
+    cout << res << "\n";
 }

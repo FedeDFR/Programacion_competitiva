@@ -11,8 +11,62 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 
-bool decrece(ll a, ll b) {
-    return a < b;
+bool bins(ll arr[],ll n, ll tomo, ll a, ll x, ll b, ll y, ll k) {
+    vector<ll> v;
+    ll j = 0;
+    while(j < n && j < tomo) {
+        v.pb(arr[j]);
+        j++;
+    }
+
+    sort(v.begin(), v.end());
+    reverse(v.begin(), v.end());
+
+    ll mulab = tomo/lcm(a,b), i = 0, res = 0;
+    //cout << mulab << " " << a << " " << b << "fede\n";
+    while(mulab > 0 && i < n) {
+        res += (arr[i]*(x+y))/100;
+        mulab--;
+        //cout << (arr[i]*(x+y))/100 << "a+b\n";
+        i++;
+    }
+
+    if (a > b) {
+        ll aaux = (tomo/a)-tomo/lcm(a,b);
+        while(aaux > 0 && i < n) {
+            res += (arr[i]*x)/100;
+            aaux--;
+            i++;
+        }
+
+        ll baux = (tomo/b)-tomo/lcm(a,b);
+        while(baux > 0 && i < n) {
+            res += (arr[i]*y)/100;
+            baux--;
+            i++;
+        }
+        cout << res << "q\n";
+        return res > k;
+    } else {
+        ll baux = (tomo/b)-tomo/lcm(a,b);
+        while(baux > 0 && i < n) {
+            res += (arr[i]*y)/100;
+            baux--;
+            //cout << (arr[i]*y)/100 << "b\n";
+            i++;
+        }
+
+        ll aaux = (tomo/a)-tomo/lcm(a,b);
+        while(aaux > 0 && i < n) {
+            res += (arr[i]*x)/100;
+            aaux--;
+            //cout << (arr[i]*x)/100 << "a\n";
+            i++;
+        }
+        cout << res << "test\n";
+        return res >= k;
+    }
+
 }
 
 int main () {
@@ -26,12 +80,28 @@ int main () {
         fore(i,0,n) {
             cin >> arr[i];
         }
-        ll a, x; cin >> a >> x;
-        ll b, y; cin >> b >> y;
+        ll a, x; cin >> x >> a;
+        ll b, y; cin >> y >> b;
         ll k; cin >> k;
 
-        sort(arr, arr + n, decrece);
-        ll l = 0, r = 1e10;
+        sort(arr, arr+n);
+        reverse(arr, arr+n);
 
+        ll l = 0, r = n, m;
+        while(l<=r){
+            m=(l+r)/2;
+ 
+            if(!bins(arr,n,m,a,x,b,y,k)){
+                l=m+1;
+            } else {    
+                r=m-1;
+            }
+        }
+
+        if(bins(arr,n,l,a,x,b,y,k)) {
+            cout << l << "\n";
+        } else {
+            cout << -1 << "\n";
+        }
     }
 }

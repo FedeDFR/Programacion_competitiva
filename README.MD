@@ -19,7 +19,7 @@
 
     4.4 [Map](#map)
 
-5. [Algoritmos](#algoritmos)
+5. [Grafos](#grafos)
 
     5.1 [Dijkstra](#1-dijkstra)
 
@@ -29,24 +29,21 @@
 
     5.3 [BFS](#4-bfs)
 
-    5.5 [Matematica](#5-matematica)
+6. [Matematica](#5-matematica)
 
-6. [Trucos y funciones](#6-trucos-y-funciones)
+7. [Trucos y funciones](#6-trucos-y-funciones)
 
-    6.1 [División techo](#61-división-techo)
+    7.1 [División techo](#61-división-techo)
 
-    6.2 [Sumas parciales](#62-sumas-parciales)
+    7.2 [Sumas parciales](#62-sumas-parciales)
 
-    6.3 [Ordenar un arreglo](#63-ordenar-un-arreglo)
+    7.3 [Ordenar un arreglo](#63-ordenar-un-arreglo)
 
-    6.4 [Primer elemento mayor o igual a $x$](#64-primer-elemento-mayor-o-igual-a-x)
+    7.4 [Primer elemento mayor o igual a $x$](#64-primer-elemento-mayor-o-igual-a-x)
 
-    6.5 [memset](#65-memset)
+    7.5 [memset](#65-memset)
 
-    6.6 [Trigonometría](#66-trigonometría)
-
-    6.7 [Strings](#41-strings)
-
+    7.6 [Trigonometría](#66-trigonometría)
     
 
 
@@ -73,25 +70,24 @@ Estos son los macros:
 #include <bits/stdc++.h>
 #define fore(i,a,b) for(int i=a;i<b;i++)
 #define pb push_back
-#define sz(x) (ll)x.size()
+#define sz(x) ((int)x.size())
 #define fst first
 #define snd second 
 #define all(x) x.begin(),x.end()
-#define REGALO ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define imp(v) {for(auto gdljh:v)cout<<gdljh<<" "; cout<<"\n";}
+#define NICO ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
 using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
+const ll MOD=1e9+7;
 
 
 int main () {
-    REGALO;
-    ll t;
-    cin >> t;
+    NICO;
     
-    while(t--){
-    }
 }
+
 ```
 ## 3. Tiempos y orden
 
@@ -103,61 +99,100 @@ Funcion de ordenacion de c++ es de $O(n*log(n))$.
 
 ### 4.1. Strings 
 
-```c++
-string s="Hola mundo ";
-string t = "ANA";
-string a = s + t ;          //concatena
 
-char c,s; cin >> c>>s;
-cout << int (c-'a') <<  "\n"
-cout << char('a'+15) << "\n";  //devuelve la posicion en ascii de c - el valor en ascii de 'a', despues imprime el char 'p'
-```
++ Definir un string.
+    ```c++
+    string s="Hola ";
+    string t = "mundo";
+    ```
+
++ Concatenar dos strings.
+    ```c++
+    string a = s + t;
+    ```
+
++ Busca cualquier carácter que esté en mayúsculas.
+    ```c++
+	int isupper(int c);
+    ```
+	
++ Busca cualquier carácter que sea letra minúscula.
+    ```c++
+	int islower(int c);
+    ```
++ Convierte una letra mayúscula en la minúscula correspondiente.Si el argumento es un carácter para el que isupper resulta verdadero y existe un caracter correspondiente para el cual islower resulta verdadero, la función tolower devuelve elo carácter correspondiente.
+    ```c++
+	int tolower(int c);
+    ```
+
++ Convierte todo el string a minuscula.
+    ```c++
+    string str; cin >> str;
+
+    for (char &c : str) {
+        c = tolower(c);
+    }
+    ```
+
++ Convierte una letra minúscula a la letra mayúscula correspondiente.Si el argumento es un carácter para el cual islower resulta verdadero y existe un carácter correspondiente para el cual isupper es verdadero, la función toupper devueve el carácter correspondiente.
+    ```c++
+	int toupper(int c);
+    ```
+
++ Convierte todo el string a mayuscula.
+    ```c++
+    string str; cin >> str;
+    
+    for (char &c : str) {
+        c = tolower(c);
+    }
+    ```
 
 ### 4.2. Vectores
 
-* Crea un vector:
++ Crea un vector:
 
     ```c++
     vector <int> v;
     ```
-* Agrega el elemento x al final del vector:
++ Agrega el elemento x al final del vector:
     ```c++
     v.push_back(x);
     ```
-* Elimina el elemento x:
++ Elimina el elemento x:
     ```c++
     v.pop_back(x);
     ```
-* Tamaño del vector:
++ Tamaño del vector:
     ```c++
     v.size();
     ```
-* Ordena el vector con complejidad O(n*log(n)):
++ Ordena el vector con complejidad O(n*log(n)):
     ```c++
     sort(v.begin(), v.end());
     ```
-* Devuelve la posicion del menor elemento mayor a p:
++ Devuelve la posicion del menor elemento mayor a p:
     ```c++
     lower_bound(a.begin(), a.end(), p) - a.begin();
     ```
-* Ciclo con vectores:
++ Ciclo con vectores:
     ```c++
     for(auto i:v){
-        cout << i << "";    //imprime los elementos del arreglo
+        cout << i << " ";    //imprime los elementos del arreglo
     }
     ```
 
 ### 4.3. Set
 
-* Crea un set:
++ Crea un set:
     ```c++
     set<ll> st;
     ```
-* Insertamos un elemento en el conjunto, si hay varios no los agrega repetidos:
++ Insertamos un elemento en el conjunto, si hay varios no los agrega repetidos:
     ```c++
     st.insert(x);
     ```
-* Elimino el elemnto x del set:
++ Elimino el elemnto x del set:
     ```c++
     st.erase(x);
     ```
@@ -171,24 +206,76 @@ Todas las funciones son de orden O(log(n)).
 
 Podes asociar distintos tipos de datos a otros
 
-* Inicializo un map que asocia un pair con un int:
++ Inicializo un map que asocia un pair con un int:
     ```c++
     map <pair <ll,ll>,int> mp;
     ```
-* Asocia el pair {2,4} esta asociada al numero 7:
+
++ Asocia el pair {2,4} esta asociada al numero 7:
     ```c++
-    mp [{2,4}]=7;
+    mp [{2,4}] = 7;
     ```
-* Libera la asociacion al pair {2,4} a 7:
+
++ Libera la asociacion al pair {2,4} a 7:
     ```c++
     mp.erase ({2,4});
     ```
-* Devuelve 1 si el pair {2,4} esta asociado a algo:
+
++ Devuelve 1 si el pair {2,4} esta asociado a algo:
     ```c++
     mp.count({2,4});
     ```
 
-## 5. Algoritmos
++ Inicializo un map que asocia un string con un int:
+    ```c++
+    map <string,int> años;
+    ```
+
++ Asocia el pair {2,4} esta asociada al numero 7:
+    ```c++
+    años["Fede"] = 21;
+    ```
+
+### 4.5 Pair 
+
++ Inicializando pairs.
+    ```c++
+    pair<int,int> p = {1,2}, q = {3,1}, r = {3,0};
+    ```
+
++ Accedo al primer elemento del pair.
+    ```c++
+    p.first;
+    ```
+
++ Accedo al segundo elemento del pair.
+    ```c++
+    p.second;
+    ```
+
++ Ejemplo:
+    ```c++
+    int n; cin >> n;
+    vector <pair<int,int>> v;
+
+    fore(i,0,n) {
+        int x; cin >> x;
+        v.push_back({x,i});     
+    }
+    ```
+
++ Al ordenar un vector de pairs de ints, la jerarquía ya viene dada. Se ordena de menor a mayor del primer elemento del pair y despues segun el segundo elemento. Segun los anteriores 3 pairs dados el vector quedaria: 
+
+    + v[0] = {1,2};
+    + v[1] = {3,0};
+    + v[2] = {3,1};
+
+    ```c++
+    sort(v.begin(), v.end()); 
+    ```
+
+
+## 5. Grafos
 
 ### 5.1. Dijkstra
 
@@ -203,6 +290,7 @@ Este algoritmo funciona con valores $>= 0$. La complejidad es de $O((n+m)*log(n)
 ```c++
 vector<pair<int,int> > g[MAXN];  // u->[(v,cost)]
 ll dist[MAXN];
+
 void dijkstra(int x){
 	memset(dist,-1,sizeof(dist));
 	priority_queue<pair<ll,int> > q;
@@ -265,7 +353,7 @@ El & me sirve para modificar los elementos que voy a ingresar y para no copiar t
 void dfs(ll nodoQueVeo, vector<vector<ll>> &Grafo, vector<bool> &Vistado) {
     Vistado[nodoQueVeo] = true;
 
-    for(ll u :Grafo[nodeQueVeo]) {
+    for(ll u :Grafo[nodoQueVeo]) {
         if(!Vistado[u]) {
             dfs(u, Grafo, Vistado);
         }
@@ -279,18 +367,18 @@ Es un algoritmo de búsqueda no informada utilizado para recorrer o buscar eleme
 
 #### Codigo:
 ```c++
-void bfs(ll nodoQueVeo, vector<vector<ll>> &Grafo) {
-    vector<bool> Visitado(sz(Grafo))     // Le da el tamaño de Grafo
+void bfs(ll v, vector<vector<ll>> &g) {
+    vector<bool> vis(sz(g),false);
     queue<ll> q;
-
-    Visitado[v] = true;
-    q.push(v)
-    while(!q.empty()) {
+    vis[v] = true;
+    q.push(v);
+    
+    while (!q.empty()) {
         v = q.front();
         q.pop();
-        for(ll u :Grafo[v]) {
-            if (!Visitado[u]) {    
-                Visitado[u] = true;
+        for (ll u : g[v]) {
+            if (!vis[u]) {
+                vis[u] = true;
                 q.push(u);
             }
         }
@@ -298,9 +386,61 @@ void bfs(ll nodoQueVeo, vector<vector<ll>> &Grafo) {
 }
 ```
 
-### 5.5. Matematica
+### 5.5. Bellman ford
 
-#### 5.5.1. $mod(n)$:
+El algoritmo de Bellman-Ford genera el camino más corto en un grafo dirigido ponderado (en el que el peso de alguna de las aristas puede ser negativo).
+
+El algoritmo parte de un vértice origen que será ingresado, a diferencia de Dijkstra que utiliza una técnica voraz para seleccionar vértices de menor peso y actualizar sus distancias mediante el paso de relajación, Bellman-Ford simplemente relaja todas las aristas y lo hace |V| – 1 veces, siendo |V| el número de vértices del grafo.
+
+Para la detección de ciclos negativos realizamos el paso de relajación una vez más y si se obtuvieron mejores resultados es porque existe un ciclo negativo, para verificar porque tenemos un ciclo podemos seguir relajando las veces que queramos y seguiremos obteniendo mejores resultados.
+
+
+
+#### Codigo:
+
+```c++
+int n;
+vector<pair<int,int> > g[MAXN]; // u->[(v,cost)]
+ll dist[MAXN];
+
+void bford(int src){ // O(nm)
+	fill(dist,dist+n,INF);dist[src]=0;
+	fore(_,0,n)fore(x,0,n)if(dist[x]!=INF)for(auto t:g[x]){
+		dist[t.fst]=min(dist[t.fst],dist[x]+t.snd);
+	}
+	fore(x,0,n)if(dist[x]!=INF)for(auto t:g[x]){
+		if(dist[t.fst]>dist[x]+t.snd){
+			// neg cycle: all nodes reachable from t.fst have -INF distance
+			// to reconstruct neg cycle: save "prev" of each node, go up from t.fst until repeating a node. this node and all nodes between the two occurences form a neg cycle
+		}
+	}
+}
+```
+
+### 5.6. Floyd Warshall
+
+
+
+#### Codigo:
+
+```c++
+// g[i][j]: weight of edge (i, j) or INF if there's no edge
+// g[i][i]=0
+ll g[MAXN][MAXN];int n;
+void floyd(){ // O(n^3) . Replaces g with min distances
+	fore(k,0,n)fore(i,0,n)if(g[i][k]<INF)fore(j,0,n)if(g[k][j]<INF)
+		g[i][j]=min(g[i][j],g[i][k]+g[k][j]);
+}
+bool inNegCycle(int v){return g[v][v]<0;}
+bool hasNegCycle(int a, int b){ // true iff there's neg cycle in between
+	fore(i,0,n)if(g[a][i]<INF&&g[i][b]<INF&&g[i][i]<0)return true;
+	return false;
+}
+```
+
+## 6. Matematica
+
+### 6.1. mod(n):
 
 Si tengo el $xmod(y) =$ al resto de hacer x dividido y, si x es negativo el mod es igual a $y - (xmod(y))$. Ahora si $x = a - b$, el modulo queda $((a - b)mod(y) + y)mod(y)$ vamos a hacer esto para calcular el mod en C++ ya que este te da restos negativos.
 
@@ -324,9 +464,23 @@ Si tengo el $xmod(y) =$ al resto de hacer x dividido y, si x es negativo el mod 
     }
     ```
 
-## 6. Trucos y funciones
+### 6.2. Divisores
 
-### 6.1. División techo 
++ Cuenta la cantidad de divisores menores de x de resto r.
+    ```c++
+    ll d3(ll x, ll r) {
+        
+        //if(r == 0) return (x/3);
+        //else if(r == 1) return ((x+2)/3);
+        //else return ((x+1)/3);
+
+        return ((x+(3-r)%3)/3);
+    }
+    ```
+
+## 7. Trucos y funciones
+
+### 7.1. División techo 
 
 Para hacer una división techo entre $a$ y $b$ se hace: 
 
@@ -335,7 +489,7 @@ int a, b;
 int result = (a+b-1)/b;
 ```
 
-### 6.2. Sumas parciales
+### 7.2. Sumas parciales
 
 Supongamos que tenemos un arreglo `a[n]` y queremos calcular la suma de todas las posiciones hasta la i-esima posición, hacemos los siguiente:
 
@@ -349,7 +503,7 @@ fore(i,0,n) {
 }
 ```
 
-### 6.3. Ordenar un arreglo
+### 7.3. Ordenar un arreglo
 
 Supongamos que tenemos un arreglo `a[n]`, hacemos lo siguiente:
 
@@ -359,7 +513,7 @@ sort(a, a+n);
 
 Tiene una complejidad de $O(n log(n))$.
 
-### 6.4. Primer elemento mayor o igual a $x$
+### 7.4. Primer elemento mayor o igual a x
 
 Devuelve un puntero al primer elemento mayor igual a $x$ de un `a[n]` ordenado:
 
@@ -374,7 +528,7 @@ lower_bound(v.begin(), v.end(), x) - v.begin();
 
 Si devuelve un indice fuera de rango (un elemento mayor o igual a $x$) no existe.
 
-### 6.5. memset
+### 7.5. memset
 
 La función memset copia el valor de c (convertido a un unsigned char) a cada uno de los primeros n caracteres en el objeto al cual señala s. La función memset devuelve el valor de s.
 
@@ -382,7 +536,7 @@ La función memset copia el valor de c (convertido a un unsigned char) a cada un
 void *memset ( void *s, int c, size_t n);
 ```
 
-### 6.6. Trigonometría
+### 7.6. Trigonometría
 
 + Calcula el coseno de x (medido en radianes).
     ```c++
@@ -399,39 +553,19 @@ void *memset ( void *s, int c, size_t n);
 	double tan(double x);
     ```
 
-### 6.7. Strings
-
-+ Busca cualquier carácter que esté en mayúsculas.
-    ```c++
-	int isupper(int c);
-    ```
-	
-+ Busca cualquier carácter que sea letra minúscula.
-    ```c++
-	int islower(int c);
-    ```
-+ Convierte una letra mayúscula en la minúscula correspondiente.Si el argumento es un carácter para el que isupper resulta verdadero y existe un caracter correspondiente para el cual islower resulta verdadero, la función tolower devuelve elo carácter correspondiente.
-
-    ```c++
-	int tolower(int c);
-    ```
-+ Convierte una letra minúscula a la letra mayúscula correspondiente.Si el argumento es un carácter para el cual islower resulta verdadero y existe un carácter correspondiente para el cual isupper es verdadero, la función toupper devueve el carácter correspondiente.
-
-    ```c++
-	int toupper(int c);
-    ```
-
 -----------------------------/ Funciones con flotantes /-----------------------------
 
 https://www.programacionfacil.org/cursos/c++/capitulo-19-funciones-matematicas.html
 
 
------------------------------/ Union Find-Disjoint set union /-----------------------------
+## 8. Disjoint Set Union
+
+El Union-Find (también conocido como Disjoint Set Union, DSU, o estructura de conjuntos disjuntos) es una estructura de datos que maneja una colección de conjuntos disjuntos. Proporciona operaciones eficientes para unir dos conjuntos y encontrar el representante o "líder" de un conjunto en el que se encuentra un elemento determinado. Es particularmente útil en algoritmos relacionados con la teoría de grafos, como la detección de ciclos en un grafo no dirigido y el algoritmo de Kruskal para encontrar el árbol de expansión mínimo.
+
+[Link de pagina](https://cp-algorithms.com/data_structures/disjoint_set_union.html)
 
 
-https://cp-algorithms.com/data_structures/disjoint_set_union.html
-
-
+ ```c++
 uf_join(int a, int b) {
     rep[a] = rep[ab];
 }
@@ -442,58 +576,50 @@ uf_find(int a) {
     }
     uf[a] = uf_find(uf[a]);     //Sino busco el representante de donde este a
 }
+ ```
 
 
 
------------------------------/ Pair /-----------------------------
 
+## 9. Búsqueda binaria
 
-pair<int,int> p={1,2},q={3,1},r={3,0};  //inicializo pair de int
-p.first;                                //primer elemento del par
-vector<pair<int,int>> v;
-v.push_back(p);
-v.push_back(q);
-v.push_back(r);
-sort(v.begin(),v.end());                //ordeno el vector de pair
+La búsqueda binaria es un método para encontrar rápidamente un elemento en una lista que ya está ordenada. En lugar de buscar de forma secuencial desde el principio, como haría la búsqueda lineal, la búsqueda binaria utiliza un enfoque más inteligente: divide y conquista. 
 
+Mientras se cumpla la condición (se_cumple() == true) agrandara su espacio de búsqueda, de lo contrario disminuirá el espacio de búsqueda.
 
-// ejemplo
-int n; cin >> n;
-vector <pair<int,int>> v;
+Tiene una complejidad de $O(log(n))$.
 
-fore(i,0,n) {
-    int x; cin >> x;
-    v.push_back({x,i});     
-}
+#### Codigo:
 
-
------------------------------/ Busqueda binaria /-----------------------------
-
-
-int l = 0;
-int r = n-1;
-        
-while(l<=r) {
-    int mid = (l+r)/2;
-    if(a[mid] >= q) {
-        r = mid-1;
-    } else {
-        l = mid+1;
+```c++
+ll res = 0, l = 0, r = n, m;
+while(l <= r) {           
+    m = (l+r)/2;
+    if(se_cumple(a,m,h)) {
+        l = m+1;
+    } else {    
+        r = m-1;
     }
 }
+```
+
+## 10. Manejo de filas y columnas
 
 
------------------------------/ Filas y columnas /-----------------------------
+Con estas funciones le asocio un numero a el par de filas y columnas siendo el primer elemento de la primera fila/columna 0, en la segunda columna 1 y asi consecutivamente,la primera fila seria 0 hasta m-1, la segunda fila seria de m hasta 2(m-1) asi hasta la ultuma que seria de n*m hata n(m-1)
 
-
-//Con estas funciones le asocio un numero a el par de filas y columnas siendo el primer elemento de la primera fila/columna 0, en la segunda columna 1 y asi consecutivamente,
- la primera fila seria 0 hasta m-1, la segunda fila seria de m hasta 2(m-1) asi hasta la ultuma que seria de n*m hata n(m-1)
-
-int to(nt i, int j) {
+```c++
+int to(nt i, int j) { //revisar
     m*i+j;
 }
+```
 
-ii from(int x) {        //Esta te devuelve el pair del numero asociado de la fila y la columna respectivamente
++ Esta función te devuelve el pair del numero asociado de la fila y la columna respectivamente.
+```c++
+ii from(int x) {
     return {x/m, x%m};
 }
+```
+
+
 
