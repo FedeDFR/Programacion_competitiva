@@ -277,7 +277,20 @@ Podes asociar distintos tipos de datos a otros
 
 ## 5. Grafos
 
-### 5.1. Dijkstra
+### 5.1. Conceptos
+
+#### 5.1.1. Vertex cover
+
+Definción: En la disciplina matemática de la teoría de grafos, una cobertura de vértices (en inglés, vertex cover) o simplemente cobertura de un grafo, es un conjunto de vértices tales que cada arista del grafo es incidente a al menos un vértice del conjunto.
+
+Ejemplos: 
+
+![Vertex_cover | Vertex_cover2](/Imagenes/vertex_cover.png)
+
+
+### 5.2. Algortimos
+
+### 5.2.1. Dijkstra
 
 Veo el minimo coste para llegar de un nodo a otro, actualizando los costos de llegar a los nodos vecinos. 
 Este algoritmo funciona con valores $>= 0$. La complejidad es de $O((n+m)*log(n))$ donde tengo $n$ nodos y $m$ aristas.
