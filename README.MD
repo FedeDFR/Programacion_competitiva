@@ -453,33 +453,42 @@ bool hasNegCycle(int a, int b){ // true iff there's neg cycle in between
 
 ## 6. Matematica
 
-### 6.1. mod(n):
+### 6.1. Exponenciación:
 
-Si tengo el $xmod(y) =$ al resto de hacer x dividido y, si x es negativo el mod es igual a $y - (xmod(y))$. Ahora si $x = a - b$, el modulo queda $((a - b)mod(y) + y)mod(y)$ vamos a hacer esto para calcular el mod en C++ ya que este te da restos negativos.
+Supongamos que queremos calcular $b^emod(MOD)$ siendo $MOD = 1e9+7$ en c++ haríamos los siguitente:
 
- + Exponenciación binaria 
-
-    Supongamos que queremos calcular $b^emod(y)$ en c++ haríamos los siguitente:
+ + Exponenciación iterativa (mas rapida):
 
     ```c++
-    int elevar(b, e) {
-        int x;
-        if(e == 0) {
-            return 1;
-        } else if(e%2 == 0) {
-            x = elevar(b,e/2);
-            return x*x%y;
-        } else {
-            x = elevar(b,(e-1)/2);
-            x*x%y;
-            return x*b%y;
-        }
+    ll fpow(ll a, ll b){
+	ll res=1;
+	while(b>0){
+		if(b%2==1){
+			res=(res*a)%MOD;
+		}
+		a=(a*a)%MOD,b/=2;
+	}
+	return res;
     }
     ```
+
++ Exponenciación recursiva:
+
+    ```c++
+    ll binpow(ll a, ll b){
+	    if(b==0)return 1;
+	    ll r=binpow(a,b/2);
+        if(b%2==1)return r*r%MOD*a%MOD;
+	    return r*r%MOD;
+    }
+    ```
+
+
 
 ### 6.2. Divisores
 
 + Cuenta la cantidad de divisores menores de x de resto r.
+
     ```c++
     ll d3(ll x, ll r) {
         
@@ -488,6 +497,28 @@ Si tengo el $xmod(y) =$ al resto de hacer x dividido y, si x es negativo el mod 
         //else return ((x+1)/3);
 
         return ((x+(3-r)%3)/3);
+    }
+    ```
+
+### 6.3. mod(n):
+
+Si tengo el $ xmod(y) = $ al resto de hacer x dividido y, si x es negativo el mod es igual a $ y - (xmod(y)) $. Ahora si $ x = a - b $, el modulo queda $ ((a - b)mod(y) + y)mod(y) $ vamos a hacer esto para calcular el mod en C++ ya que este te da restos negativos.
+
+### 6.4. Factorial:
+
+    ```c++
+    const ll MAXN=(2*1000000)+5;
+    ll fc[MAXN],fci[MAXN];
+ 
+    void factoriales(){
+        fc[0]=1;
+        fore(i,1,MAXN)fc[i]=mul(fc[i-1],i);
+        fci[MAXN-1]=fpow(fc[MAXN-1],MOD-2);
+        for(ll i=MAXN-2;i>=0;i--)fci[i]=mul(fci[i+1],i+1);
+    }   
+ 
+    ll comb(ll n, ll k){
+        return mul(fc[n],mul(fci[k],fci[n-k]));
     }
     ```
 
